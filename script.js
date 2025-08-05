@@ -8,7 +8,7 @@ const Api_Url =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyC7XlZmt3vydEoU4T7TqjZSGl2CuBi6Y2M";
 
 let user = {
-  message: null,
+  message: null, 
   file: {
     mime_type: null,
     data: null,
