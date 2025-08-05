@@ -81,6 +81,12 @@ prompt.addEventListener("keydown", (e) => {
     handlechatResponse(prompt.value);
   }
 });
+submitBtn.addEventListener("click", () => {
+  if (prompt.value.trim() !== "") {
+    handlechatResponse(prompt.value);
+  }
+});
+
 imageinput.addEventListener("change", () => {
   const file = imageinput.files[0];
   if (!file) return;
