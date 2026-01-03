@@ -106,5 +106,4 @@ imageinput.addEventListener("change", () => {
 
 imagebtn.addEventListener("click", () => {
   imagebtn.querySelector("input").click();
-}); 
-
+});
