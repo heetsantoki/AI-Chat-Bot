@@ -24,34 +24,52 @@ function createChatBox(html, classes) {
 
 async function generateResponse(aiChatBox) {
   let text = aiChatBox.querySelector(".ai-chat-area");
+
+  let parts = [{ text: user.message }];
+
+  if (user.file && user.file.data) {
+    parts.push({
+      inline_data: {
+        mime_type: user.file.mime_type,
+        data: user.file.data,
+      },
+    });
+  }
+
   let RequestOption = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      contents: [{ parts: [
-  { text: "hello" },
-  { inline_data: {...} }
-]
- }],
+      contents: [
+        {
+          parts: parts,
+        },
+      ],
     }),
   };
+
   try {
     let response = await fetch(Api_Url, RequestOption);
     let data = await response.json();
-    let apiResponse = data.candidates[0].content.parts[0].text
-      .replace(/\*\*(.*?)\*\*/g, "$1")
-      .trim();
+
+    console.log("Gemini response:", data); // 🔍 debug
+
+    let apiResponse =
+      data.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
+
     text.innerHTML = apiResponse;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    text.innerHTML = "❌ Error occurred";
   } finally {
     chatContainer.scrollTo({
       top: chatContainer.scrollHeight,
       behavior: "smooth",
     });
-    image.src= `img.svg`
-    image.classList.remove("choose")
-    user.file={}
+
+    image.src = "img.svg";
+    image.classList.remove("choose");
+    user.file = {};
   }
 }
 
