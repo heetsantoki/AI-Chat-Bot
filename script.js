@@ -28,7 +28,11 @@ async function generateResponse(aiChatBox) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      contents: [{ parts: [{ text: user.message },(user.file.data?[{"inline_data":user.file}]:[])] }],
+      contents: [{ parts: [
+  { text: "hello" },
+  { inline_data: {...} }
+]
+ }],
     }),
   };
   try {
